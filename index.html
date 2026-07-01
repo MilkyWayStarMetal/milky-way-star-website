@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milky Way Star | Global Metal Recycling, Refining & Trading Services</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=JetBrains+Mono:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome for industrial icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        obsidian: '#050607',
+                        titanium: '#0e1012',
+                        ecoGreen: '#10b981',    
+                        mintGlow: '#34d399',    
+                        copperWarm: '#f97316',  
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050607;
+            color: #f4f4f5;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050607;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #181b1f;
+            border-radius: 2px;
+        }
+        
+        .text-gradient-orange {
+            background: linear-gradient(135deg, #f97316 10%, #facc15 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-green {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .industrial-hero-photo {
+            background-image:
+                linear-gradient(90deg, rgba(3, 4, 5, 0.54) 0%, rgba(3, 4, 5, 0.24) 42%, rgba(3, 4, 5, 0.08) 72%, rgba(3, 4, 5, 0.24) 100%),
+                linear-gradient(180deg, rgba(3, 4, 5, 0.12) 0%, rgba(3, 4, 5, 0.02) 42%, rgba(3, 4, 5, 0.38) 100%),
+                url("assets/smelting-sparks-hero.png");
+            background-size: cover;
+            background-position: center;
+            filter: saturate(1.18) contrast(1.02) brightness(1.34);
+        }
+        .molten-flow-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            mix-blend-mode: screen;
+            opacity: 0.46;
+        }
+        .molten-flow-layer::before,
+        .molten-flow-layer::after {
+            content: "";
+            position: absolute;
+            right: 16%;
+            top: 45%;
+            width: 46vw;
+            height: 10vw;
+            max-height: 150px;
+            min-height: 70px;
+            border-radius: 999px;
+            background:
+                radial-gradient(circle at 12% 50%, rgba(255,255,255,0.95), rgba(250,204,21,0.92) 12%, rgba(249,115,22,0.55) 34%, transparent 68%),
+                linear-gradient(90deg, transparent 0%, rgba(250,204,21,0.82) 24%, rgba(249,115,22,0.92) 48%, rgba(251,146,60,0.4) 72%, transparent 100%);
+            filter: blur(10px);
+            transform: rotate(-7deg);
+            animation: molten-flow 4.8s ease-in-out infinite;
+        }
+        .molten-flow-layer::after {
+            right: 21%;
+            top: 58%;
+            width: 34vw;
+            height: 5vw;
+            min-height: 42px;
+            opacity: 0.72;
+            filter: blur(14px);
+            animation-delay: -2.2s;
+            animation-duration: 6.2s;
+        }
+        @keyframes molten-flow {
+            0%, 100% {
+                background-position: 0% 50%, 0% 50%;
+                transform: translateX(-2%) rotate(-7deg) scaleX(0.94);
+            }
+            50% {
+                background-position: 80% 50%, 100% 50%;
+                transform: translateX(4%) rotate(-5deg) scaleX(1.08);
+            }
+        }
+        .section-title {
+            color: #00324d;
+            letter-spacing: 0;
+        }
+        .flow-card {
+            box-shadow: 0 14px 38px rgba(15, 23, 42, 0.08);
+        }
+        .flow-icon-panel {
+            background: linear-gradient(135deg, #ff9f1c 0%, #f97316 54%, #b45309 100%);
+            box-shadow: inset 0 -14px 30px rgba(124, 45, 18, 0.16);
+        }
+        .contact-input {
+            width: 100%;
+            border: 0;
+            border-bottom: 1px solid #d7dce0;
+            background: transparent;
+            padding: 16px 0 16px 38px;
+            color: #0f172a;
+            outline: none;
+            font-weight: 600;
+        }
+        .contact-input::placeholder {
+            color: #8a8f95;
+        }
+        .company-gallery {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-auto-rows: 92px;
+            gap: 12px;
+        }
+        .company-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0 34px 0 34px;
+            box-shadow: 0 18px 34px rgba(15, 23, 42, 0.12);
+        }
+        .company-gallery .wide {
+            grid-column: span 4;
+            grid-row: span 2;
+        }
+        .company-gallery .medium {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+        .company-gallery .small {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+        @media (max-width: 640px) {
+            .company-gallery {
+                grid-auto-rows: 86px;
+                gap: 10px;
+            }
+            .company-gallery .wide,
+            .company-gallery .medium,
+            .company-gallery .small {
+                grid-column: span 3;
+                grid-row: span 2;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-emerald-950 selection:text-emerald-300 min-h-screen flex flex-col justify-between">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-obsidian/60 border-b border-zinc-900/40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <span class="font-mono tracking-widest text-base sm:text-lg font-bold text-white uppercase transition-colors duration-300 group-hover:text-emerald-400">Milky Way Star</span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <div class="hidden md:flex items-center space-x-10 text-xs tracking-wider text-zinc-400 font-light uppercase">
+                <a href="#" class="hover:text-emerald-400 transition-colors duration-300">Home</a>
+                <a href="#company" class="hover:text-emerald-400 transition-colors duration-300">Company</a>
+                <a href="#products" class="hover:text-emerald-400 transition-colors duration-300">Products & Manufacturing</a>
+                <a href="#contact" class="hover:text-emerald-400 transition-colors duration-300">Contact Us</a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-zinc-400 focus:outline-none" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer menu -->
+        <div id="mobileDrawer" class="hidden md:hidden fixed inset-0 top-20 bg-obsidian/95 backdrop-blur-lg z-40 px-8 py-12 border-t border-zinc-900">
+            <div class="flex flex-col space-y-8 text-xl tracking-wide font-light">
+                <a href="#" class="mobile-link text-zinc-300 hover:text-emerald-400">Home</a>
+                <a href="#company" class="mobile-link text-zinc-300 hover:text-emerald-400">Company</a>
+                <a href="#products" class="mobile-link text-zinc-300 hover:text-emerald-400">Products & Manufacturing</a>
+                <a href="#contact" class="mobile-link text-zinc-300 hover:text-emerald-400">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: HOME (Hero with real smelting facility photography) -->
+    <section id="home" class="relative min-h-screen flex flex-col justify-between pt-28 pb-12 overflow-hidden bg-[#030405]">
+        <!-- Local company facility photo. -->
+        <div class="industrial-hero-photo absolute inset-0 z-0"></div>
+        <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_66%_52%,rgba(249,115,22,0.22),transparent_32%),linear-gradient(180deg,rgba(3,4,5,0)_0%,rgba(3,4,5,0.32)_92%)]"></div>
+        <div class="molten-flow-layer z-0" aria-hidden="true"></div>
+        
+        <!-- SVG Vector Layout precisely modelled after the structure in 20130409_102701.jpg -->
+        <div class="hidden absolute inset-0 w-full h-full pointer-events-none opacity-20 z-0 items-center justify-center overflow-hidden">
+            <svg class="w-full h-full min-w-[1400px] max-w-[2000px]" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Ceiling / Roof Truss Structural Framework -->
+                <path d="M0 40 H1920 M0 80 H1920 M0 120 H1920" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+                
+                <!-- Vertical structural support columns echoing "20130409_102701.jpg" -->
+                <rect x="80" y="0" width="20" height="1080" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+                
+                <!-- PRIMARY LEFT PILLAR WITH YELLOW SAFETY CAGE LADDER -->
+                <g id="left-primary-column">
+                    <!-- Main Concrete/Steel Grey Pillar -->
+                    <rect x="200" y="0" width="70" height="1080" fill="rgba(14, 16, 18, 0.95)" stroke="rgba(255,255,255,0.05)" stroke-width="1.5"/>
+                    <line x1="235" y1="0" x2="235" y2="1080" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    <!-- Yellow Industrial Safety Ladder / Cage Structure -->
+                    <line x1="180" y1="0" x2="180" y2="600" stroke="#d97706" stroke-width="2.5" opacity="0.5"/>
+                    <line x1="195" y1="0" x2="195" y2="600" stroke="#d97706" stroke-width="2.5" opacity="0.5"/>
+                    <!-- Ladder Rungs -->
+                    <path d="M180 50 H195 M180 100 H195 M180 150 H195 M180 200 H195 M180 250 H195 M180 300 H195 M180 350 H195 M180 400 H195 M180 450 H195 M180 500 H195 M180 550 H195" stroke="#d97706" stroke-width="2" opacity="0.4"/>
+                    <!-- Curved Outer Safety Hoops -->
+                    <path d="M180 80 Q150 100 180 120" stroke="#d97706" stroke-width="2.5" fill="none" opacity="0.4"/>
+                    <path d="M180 200 Q150 220 180 240" stroke="#d97706" stroke-width="2.5" fill="none" opacity="0.4"/>
+                    <path d="M180 320 Q150 340 180 360" stroke="#d97706" stroke-width="2.5" fill="none" opacity="0.4"/>
+                    <path d="M180 440 Q150 460 180 480" stroke="#d97706" stroke-width="2.5" fill="none" opacity="0.4"/>
+                    <!-- Drainage attachment piping -->
+                    <path d="M275 0 V800 L295 850 V1080" stroke="rgba(255,255,255,0.05)" stroke-width="3" fill="none"/>
+                </g>
+
+                <!-- Background Pillars (Replicating the column rhythm in 20130409_102701.jpg background) -->
+                <rect x="520" y="80" width="35" height="1000" fill="rgba(10, 11, 13, 0.8)" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+                <rect x="1000" y="80" width="35" height="1000" fill="rgba(10, 11, 13, 0.8)" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+                <rect x="1480" y="80" width="35" height="1000" fill="rgba(10, 11, 13, 0.8)" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+
+                <!-- Structural X-Bracing on Back Walls -->
+                <line x1="555" y1="360" x2="1000" y2="760" stroke="rgba(255,255,255,0.02)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                <line x1="1000" y1="360" x2="555" y2="760" stroke="rgba(255,255,255,0.02)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                
+                <line x1="1035" y1="360" x2="1480" y2="760" stroke="rgba(255,255,255,0.02)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                <line x1="1480" y1="360" x2="1035" y2="760" stroke="rgba(255,255,255,0.02)" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+                <!-- Double Row of Horizontal Windows -->
+                <g id="top-row-windows" stroke="rgba(255,255,255,0.04)" stroke-width="1.5" fill="rgba(255,255,255,0.005)">
+                    <rect x="310" y="110" width="170" height="60" rx="3"/>
+                    <rect x="600" y="110" width="170" height="60" rx="3"/>
+                    <rect x="790" y="110" width="170" height="60" rx="3"/>
+                    <rect x="1080" y="110" width="170" height="60" rx="3"/>
+                    <rect x="1270" y="110" width="170" height="60" rx="3"/>
+                    <rect x="1560" y="110" width="170" height="60" rx="3"/>
+                </g>
+                <g id="mid-row-windows" stroke="rgba(255,255,255,0.04)" stroke-width="1.5" fill="rgba(255,255,255,0.005)">
+                    <rect x="310" y="320" width="170" height="45" rx="2"/>
+                    <rect x="600" y="320" width="170" height="45" rx="2"/>
+                    <rect x="790" y="320" width="170" height="45" rx="2"/>
+                    <rect x="1080" y="320" width="170" height="45" rx="2"/>
+                    <rect x="1270" y="320" width="170" height="45" rx="2"/>
+                    <rect x="1560" y="320" width="170" height="45" rx="2"/>
+                </g>
+
+                <!-- Soft light rays -->
+                <polygon points="310,170 150,1080 350,1080 480,170" fill="url(#ecoLightBeam)" opacity="0.25"/>
+                <polygon points="790,110 630,1080 830,1080 960,110" fill="url(#ecoLightBeam)" opacity="0.25"/>
+
+                <!-- BULK RECYCLING TON BAGS -->
+                <g id="industrial-bulk-bags" stroke="rgba(16, 185, 129, 0.15)" stroke-width="1" fill="rgba(16, 185, 129, 0.02)">
+                    <path d="M720 620 C720 600, 730 595, 760 595 C790 595, 800 600, 800 620 L805 680 C805 690, 795 695, 760 695 C725 695, 715 690, 715 680 Z"/>
+                    <path d="M725 595 Q725 580 735 595 M785 595 Q785 580 795 595" stroke="rgba(16, 185, 129, 0.3)" fill="none"/>
+                    
+                    <path d="M630 625 C630 610, 640 605, 665 605 C690 605, 700 610, 700 625 L705 680 C705 688, 695 693, 665 693 C635 693, 625 688, 625 680 Z"/>
+                    <path d="M635 605 Q635 590 645 605 M685 605 Q685 590 695 605" stroke="rgba(16, 185, 129, 0.3)" fill="none"/>
+
+                    <path d="M815 620 C815 600, 825 595, 855 595 C885 595, 895 600, 895 620 L900 680 C900 690, 890 695, 855 695 C820 695, 810 690, 810 680 Z"/>
+                    <path d="M820 595 Q820 580 830 595 M880 595 Q880 580 890 595" stroke="rgba(16, 185, 129, 0.3)" fill="none"/>
+
+                    <path d="M1150 630 C1150 605, 1165 600, 1205 600 C1245 600, 1260 605, 1260 630 L1265 695 C1265 705, 1250 710, 1205 710 C1160 710, 1145 705, 1145 695 Z" stroke-width="1.2" fill="rgba(16, 185, 129, 0.03)"/>
+                    <path d="M1155 600 Q1155 580 1170 600 M1235 600 Q1235 580 1250 600" stroke="rgba(16, 185, 129, 0.4)" fill="none"/>
+                </g>
+
+                <!-- GREEN COATED FOREGROUND FLOOR LAYER -->
+                <rect x="0" y="800" width="1920" height="280" fill="url(#greenFloorGlow)" opacity="0.45"/>
+                <path d="M200 800 L0 1080 M520 800 L300 1080 M1000 800 L900 1080 M1480 800 L1600 1080" stroke="rgba(16, 185, 129, 0.04)" stroke-width="1"/>
+
+                <!-- Gradients Definitions -->
+                <defs>
+                    <linearGradient id="ecoLightBeam" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="rgba(16, 185, 129, 0.06)"/>
+                        <stop offset="100%" stop-color="rgba(16, 185, 129, 0.0)"/>
+                    </linearGradient>
+                    <linearGradient id="greenFloorGlow" x1="50%" y1="0%" x2="50%" y2="100%">
+                        <stop offset="0%" stop-color="rgba(16, 185, 129, 0.0)"/>
+                        <stop offset="40%" stop-color="rgba(16, 185, 129, 0.05)"/>
+                        <stop offset="100%" stop-color="rgba(6, 95, 70, 0.18)"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <!-- Dynamic Thermodynamic Clean Smelting Spark Canvas -->
+        <canvas id="liquidMetalCanvas" class="absolute inset-0 w-full h-full pointer-events-auto opacity-[0.34] z-0"></canvas>
+        
+        <!-- Eco Green ambient glow behind hero -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-emerald-950/10 blur-[140px] rounded-full pointer-events-none z-0"></div>
+
+        <!-- Centered Main Hero Block -->
+        <div class="relative max-w-7xl mx-auto px-6 flex flex-col items-center justify-center flex-grow z-10 text-center">
+            <!-- Sleek, High-Impact Slogan -->
+            <h1 class="text-5xl sm:text-7xl md:text-8xl font-normal tracking-tight leading-[1.05] mb-6 sm:mb-8">
+                <span class="text-gradient-orange font-sans">Recovering Metals.</span>
+            </h1>
+
+            <!-- Subtext Slogan -->
+            <p class="font-sans font-light text-zinc-300 max-w-3xl text-center leading-relaxed tracking-wide text-xs sm:text-sm md:text-base mb-10 sm:mb-12">
+                Global metal recycling, recovery, and refining services for industrial residues, secondary raw materials, and metal-bearing by-products.
+            </p>
+
+            <!-- Call to Actions -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                <a href="#company" class="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black text-xs uppercase tracking-widest font-semibold rounded-full transition-all duration-300 shadow-lg shadow-emerald-500/10 text-center">
+                    About Us
+                </a>
+                <a href="#products" class="w-full sm:w-auto px-8 py-4 bg-zinc-900/40 hover:bg-zinc-900/80 border border-zinc-800 hover:border-zinc-700 text-zinc-300 text-xs uppercase tracking-widest font-light rounded-full transition-all duration-300 text-center">
+                    Our Zero-Waste System <i class="fa-solid fa-arrow-right ml-2 text-[10px] text-zinc-500"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll down indicator -->
+        <div class="relative z-10 flex flex-col items-center justify-center text-zinc-500 hover:text-emerald-400 transition-colors duration-300 mt-auto">
+            <a href="#company" class="flex flex-col items-center space-y-2 group">
+                <span class="font-mono text-[9px] uppercase tracking-[0.2em]">Explore Company</span>
+                <i class="fa-solid fa-chevron-down text-xs animate-bounce group-hover:translate-y-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- SECTION 2: COMPANY -->
+    <section id="company" class="relative bg-white text-slate-950 py-24 px-6 z-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div class="lg:col-span-6">
+                <h2 class="section-title text-4xl sm:text-5xl font-bold leading-tight mb-8">
+                    Global metal recovery and refining services
+                </h2>
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="text-[#0078df] text-xl font-semibold">Company Overview</span>
+                    <span class="w-8 h-[2px] bg-[#0078df]"></span>
+                </div>
+                <p class="text-lg sm:text-xl font-bold leading-relaxed mb-8">
+                    Milky Way Star provides recycling, recovery, and refining services for metal-bearing industrial residues and secondary raw materials.
+                </p>
+                <div class="space-y-5 text-base sm:text-lg leading-8 text-slate-800">
+                    <p>
+                        We work with manufacturers, trading companies, recyclers, and industrial partners worldwide to recover value from zinc, copper, nickel, vanadium spent catalyst, brass, copper concentrate, zinc ore, and other recyclable metal by-products.
+                    </p>
+                    <p>
+                        Our services cover material sourcing, inspection, quality classification, warehouse handling, logistics coordination, and downstream processing partnerships. We help customers reduce waste, improve resource utilization, and return valuable metal resources to the global supply chain.
+                    </p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6">
+                <div class="company-gallery">
+                    <img class="wide" src="assets/factory-building.png" alt="Factory yard and recyclable industrial material storage">
+                    <img class="medium" src="assets/waste-yard-loader.jpg" alt="Loader working in waste material yard">
+                    <img class="medium" src="assets/bulk-bags-close.jpg" alt="Bulk bags of recyclable metal-bearing material">
+                    <img class="small" src="assets/stacked-bags-yard.jpg" alt="Stacked industrial recycling bags">
+                    <img class="small" src="assets/plant-interior.jpg" alt="Factory interior with stored material">
+                    <img class="small" src="assets/20130409_102658.jpg" alt="Industrial plant interior">
+                    <img class="small" src="assets/zinc-eaf-material.jpg" alt="Recyclable zinc EAF material">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PRODUCTS & MANUFACTURING -->
+    <section id="products" class="relative bg-white text-slate-950 py-24 px-6 z-10 border-t border-slate-100">
+        <div class="max-w-6xl mx-auto">
+            <div class="max-w-3xl mb-14">
+                <p class="text-lg leading-8 mb-8">
+                    We provide practical metal recycling and recovery solutions for customers handling metal-bearing residues, recyclable by-products, and secondary raw materials.
+                </p>
+                <p class="text-lg leading-8">
+                    Our service flow is designed for reliable international cooperation: transportation, collection, sorting and processing, and recovered material utilization.
+                </p>
+            </div>
+
+            <div class="bg-slate-50 p-6 sm:p-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <article class="flow-card bg-white p-5">
+                        <div class="flow-icon-panel h-36 flex items-center justify-center mb-7">
+                            <i class="fa-solid fa-route text-6xl text-white"></i>
+                        </div>
+                        <h3 class="text-[#00324d] font-bold mb-7">Material Transportation</h3>
+                    </article>
+
+                    <article class="flow-card bg-white p-5">
+                        <div class="flow-icon-panel h-36 flex items-center justify-center mb-7">
+                            <i class="fa-solid fa-warehouse text-6xl text-white"></i>
+                        </div>
+                        <h3 class="text-[#00324d] font-bold mb-7">Material Collection</h3>
+                    </article>
+
+                    <article class="flow-card bg-white p-5">
+                        <div class="flow-icon-panel h-36 flex items-center justify-center mb-7">
+                            <i class="fa-solid fa-filter text-6xl text-white"></i>
+                        </div>
+                        <h3 class="text-[#00324d] font-bold mb-7">Sorting & Processing</h3>
+                    </article>
+
+                    <article class="flow-card bg-white p-5">
+                        <div class="flow-icon-panel h-36 flex items-center justify-center mb-7">
+                            <i class="fa-solid fa-arrows-spin text-6xl text-white"></i>
+                        </div>
+                        <h3 class="text-[#00324d] font-bold mb-7">Recovered Material Use</h3>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: CONTACT -->
+    <section id="contact" class="relative bg-white text-slate-950 py-24 px-6 z-10 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-5xl sm:text-6xl font-bold mb-4">Inquiry Form</h2>
+                <div class="flex items-center justify-center gap-5 text-[#0078df] text-xl font-semibold">
+                    <span class="w-8 h-[2px] bg-slate-300"></span>
+                    <span>Submit Your Metal Recycling or Trading Inquiry</span>
+                    <span class="w-8 h-[2px] bg-slate-300"></span>
+                </div>
+            </div>
+
+            <form action="mailto:info@milkywaystarmetal.com" method="post" enctype="text/plain" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
+                <label class="relative block">
+                    <i class="fa-regular fa-user absolute left-0 top-5 text-[#0078df] text-xl"></i>
+                    <input class="contact-input" name="Name" type="text" placeholder="Company / Name">
+                </label>
+                <label class="relative block">
+                    <i class="fa-regular fa-envelope absolute left-0 top-5 text-[#0078df] text-xl"></i>
+                    <input class="contact-input" name="Email" type="email" placeholder="Business Email">
+                </label>
+                <label class="relative block">
+                    <i class="fa-brands fa-whatsapp absolute left-0 top-5 text-[#0078df] text-xl"></i>
+                    <input class="contact-input" name="Phone or WhatsApp" type="text" placeholder="Phone / WhatsApp">
+                </label>
+                <label class="relative block">
+                    <i class="fa-regular fa-pen-to-square absolute left-0 top-5 text-[#0078df] text-xl"></i>
+                    <input class="contact-input" name="Subject" type="text" placeholder="Material / Subject">
+                </label>
+                <label class="relative block md:col-span-2">
+                    <i class="fa-regular fa-comment-dots absolute left-0 top-5 text-[#0078df] text-xl"></i>
+                    <textarea class="contact-input min-h-[150px] resize-y" name="Message" placeholder="Tell us about the material, quantity, origin, destination, and your inquiry."></textarea>
+                </label>
+                <div class="md:col-span-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pt-4">
+                    <div class="text-sm text-slate-500">
+                        Email: info@milkywaystarmetal.com &nbsp; | &nbsp; WhatsApp: +86 18686879810 / +65 81367768 &nbsp; | &nbsp; WeChat: 375125275
+                    </div>
+                    <button type="submit" class="px-8 py-4 bg-[#0078df] hover:bg-[#005faf] text-white font-bold transition-colors">
+                        Send Inquiry
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="relative z-10 bg-[#050607] border-t border-zinc-900/60 py-6">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-center text-[11px] text-zinc-500 tracking-wider">
+            <span class="font-mono text-zinc-400 font-bold">Milky Way Star. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if(mobileDrawer.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                icon.className = 'fa-solid fa-xmark text-xl';
+            }
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.add('hidden');
+                mobileMenuBtn.querySelector('i').className = 'fa-solid fa-bars text-xl';
+            });
+        });
+
+        // Dynamic Electric Metallurgy Spark Animation
+        const canvas = document.getElementById('liquidMetalCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        let mouse = {
+            x: width / 2,
+            y: height / 2,
+            targetX: width / 2,
+            targetY: height / 2,
+            radius: 180
+        };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.targetX = e.clientX;
+            mouse.targetY = e.clientY;
+        });
+
+        class RecycledSpark {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * height; 
+            }
+
+            reset() {
+                this.x = width * 0.64 + (Math.random() - 0.5) * 260;
+                this.y = height * 0.58 + (Math.random() - 0.5) * 160;
+                this.size = Math.random() * 2.4 + 0.5;
+                
+                this.vx = -Math.random() * 2.6 - 0.6;
+                this.vy = (Math.random() - 0.5) * 2.6;
+                
+                const rand = Math.random();
+                if (rand > 0.6) {
+                    this.color = { r: 255, g: 214, b: 92 };
+                } else if (rand > 0.3) {
+                    this.color = { r: 249, g: 115, b: 22 };
+                } else {
+                    this.color = { r: 255, g: 247, b: 180 };
+                }
+                
+                this.alpha = Math.random() * 0.55 + 0.22;
+                this.decay = Math.random() * 0.006 + 0.003;
+            }
+
+            update() {
+                mouse.x += (mouse.targetX - mouse.x) * 0.08;
+                mouse.y += (mouse.targetY - mouse.y) * 0.08;
+
+                this.vx += (Math.sin(this.y * 0.004) * 0.03);
+                this.vy += Math.sin(this.x * 0.01) * 0.025;
+                
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < mouse.radius) {
+                    let force = (mouse.radius - dist) / mouse.radius;
+                    let angle = Math.atan2(dy, dx);
+                    this.vx -= Math.cos(angle) * force * 2.2;
+                    this.vy -= Math.sin(angle) * force * 1.2;
+                }
+
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= this.decay;
+
+                if (this.alpha <= 0 || this.y < -10 || this.y > height + 10 || this.x < -20 || this.x > width + 20) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.shadowBlur = this.size * 2;
+                ctx.shadowColor = `rgb(${this.color.r}, ${this.color.g}, ${this.color.b})`;
+                ctx.fillStyle = `rgb(${this.color.r}, ${this.color.g}, ${this.color.b})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        let sparks = [];
+        const sparkCount = 85; 
+
+        function initSparks() {
+            sparks = [];
+            for (let i = 0; i < sparkCount; i++) {
+                sparks.push(new RecycledSpark());
+            }
+        }
+
+        initSparks();
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Clean background horizontal structural grid
+            ctx.strokeStyle = 'rgba(16, 185, 129, 0.004)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < height; i += 120) {
+                ctx.beginPath();
+                ctx.moveTo(0, i);
+                ctx.lineTo(width, i);
+                ctx.stroke();
+            }
+
+            // Radial thermal induction glow
+            let furnaceCenterX = width * 0.66;
+            let furnaceCenterY = height * 0.58;
+            let radialGlow = ctx.createRadialGradient(furnaceCenterX, furnaceCenterY, 40, furnaceCenterX, furnaceCenterY, 450);
+            radialGlow.addColorStop(0, 'rgba(249, 115, 22, 0.14)'); 
+            radialGlow.addColorStop(0.6, 'rgba(250, 204, 21, 0.03)'); 
+            radialGlow.addColorStop(1, 'rgba(3, 4, 5, 0)');
+            
+            ctx.fillStyle = radialGlow;
+            ctx.fillRect(0, 0, width, height);
+
+            for (let i = 0; i < sparks.length; i++) {
+                sparks[i].update();
+                sparks[i].draw();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        window.onload = function() {
+            animate();
+        };
+</script>
+</body>
+</html>
