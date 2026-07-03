@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Milky Way Star</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=JetBrains+Mono:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'], mono: ['JetBrains Mono','monospace'] }, colors: { obsidian: '#050607' } } } }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #050607; color: #f4f4f5; overflow-x: hidden; }
+        .nav-logo-mark { position: relative; display: inline-flex; width: 2.75rem; height: 2.75rem; align-items: center; justify-content: center; flex: 0 0 auto; isolation: isolate; }
+        .nav-logo-mark::before, .nav-logo-mark::after { content: ""; position: absolute; pointer-events: none; border-radius: 999px; mix-blend-mode: screen; z-index: 2; }
+        .nav-logo-mark::before { inset: 10%; background: radial-gradient(circle at 52% 34%, rgba(255,244,194,.72), rgba(249,115,22,.2) 35%, transparent 64%); filter: blur(3px); animation: logo-flame-glow 2.8s ease-in-out infinite; }
+        .nav-logo-mark::after { inset: 42% 28% 22% 33%; border-radius: 45%; background: linear-gradient(120deg, transparent 12%, rgba(255,255,255,.92) 42%, rgba(250,204,21,.82) 54%, transparent 76%); filter: blur(1px); opacity: 0; transform: translateX(-24%) rotate(-18deg); animation: logo-crack-spark 2.35s ease-in-out infinite; }
+        .nav-logo-img { width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 1; transform-origin: 50% 68%; filter: drop-shadow(0 0 12px rgba(249,115,22,.45)); animation: logo-flame-drift 3.6s ease-in-out infinite; }
+        @media (min-width: 640px) { .nav-logo-mark { width: 3rem; height: 3rem; } }
+        @keyframes logo-flame-drift { 0%,100% { transform: rotate(-1deg) scale(1); filter: drop-shadow(0 0 10px rgba(249,115,22,.38)); } 46% { transform: rotate(1.5deg) scale(1.035); filter: drop-shadow(0 0 16px rgba(250,204,21,.58)); } 70% { transform: rotate(-.5deg) scale(1.01); } }
+        @keyframes logo-flame-glow { 0%,100% { opacity: .24; transform: scale(.9) translateY(2px); } 50% { opacity: .58; transform: scale(1.08) translateY(-1px); } }
+        @keyframes logo-crack-spark { 0%,58%,100% { opacity: 0; transform: translateX(-28%) rotate(-18deg) scaleX(.7); } 67% { opacity: .95; transform: translateX(8%) rotate(-18deg) scaleX(1.12); } 76% { opacity: .12; transform: translateX(28%) rotate(-18deg) scaleX(.82); } }
+        .contact-input { width: 100%; border: 1px solid #d7dce0; background: rgba(255,255,255,.68); padding: 18px 18px 18px 46px; color: #0f172a; outline: none; font-weight: 600; }
+        .contact-input::placeholder { color: #8a8f95; }
+        .page-hero { background-image: linear-gradient(90deg, rgba(3,4,5,.76), rgba(3,4,5,.25)), url("assets/waste-yard-loader.jpg"); background-size: cover; background-position: center; }
+        .contact-pattern { background-image: linear-gradient(120deg, rgba(15,23,42,.035) 0 1px, transparent 1px 38px), linear-gradient(60deg, rgba(15,23,42,.028) 0 1px, transparent 1px 38px); }
+    </style>
+</head>
+<body class="antialiased min-h-screen bg-obsidian">
+    <nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-obsidian/70 border-b border-zinc-900/40">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <span class="nav-logo-mark" aria-hidden="true"><img src="assets/logo-nav-icon.png" alt="" class="nav-logo-img"></span>
+                <span class="font-mono tracking-widest text-base sm:text-lg font-bold text-white uppercase group-hover:text-emerald-400">Milky Way Star</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-10 text-xs tracking-wider text-zinc-400 font-light uppercase">
+                <a href="index.html" class="hover:text-emerald-400">Home</a>
+                <a href="company.html" class="hover:text-emerald-400">Company</a>
+                <a href="products.html" class="hover:text-emerald-400">Products & Manufacturing</a>
+                <a href="contact.html" class="text-emerald-400">Contact Us</a>
+            </div>
+            <button id="mobileMenuBtn" class="md:hidden text-zinc-400" aria-label="Toggle menu"><i class="fa-solid fa-bars text-xl"></i></button>
+        </div>
+        <div id="mobileDrawer" class="hidden md:hidden fixed inset-0 top-20 bg-obsidian/95 backdrop-blur-lg z-40 px-8 py-12 border-t border-zinc-900">
+            <div class="flex flex-col space-y-8 text-xl tracking-wide font-light">
+                <a href="index.html" class="mobile-link text-zinc-300">Home</a>
+                <a href="company.html" class="mobile-link text-zinc-300">Company</a>
+                <a href="products.html" class="mobile-link text-zinc-300">Products & Manufacturing</a>
+                <a href="contact.html" class="mobile-link text-emerald-400">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-hero min-h-[52vh] pt-32 pb-20 px-6 flex items-end">
+        <div class="max-w-7xl mx-auto w-full">
+            <p class="font-mono text-xs uppercase tracking-[0.35em] text-emerald-300 mb-5">Contact Us</p>
+            <h1 class="max-w-4xl text-5xl sm:text-7xl font-semibold leading-tight">Get in touch with our metal recycling and trading team.</h1>
+        </div>
+    </header>
+
+    <main class="bg-white text-slate-950">
+        <section class="contact-pattern px-6 py-24">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                <div class="lg:col-span-6">
+                    <div class="flex items-center gap-4 mb-5">
+                        <span class="w-8 h-[2px] bg-[#d4a247]"></span>
+                        <span class="font-bold uppercase tracking-wider text-[#b5822f]">Get In Touch</span>
+                    </div>
+
+                    <div class="space-y-7 text-lg text-slate-950">
+                        <div class="flex items-start gap-4">
+                            <span class="w-11 h-11 rounded-full border border-[#d4a247] text-[#d4a247] flex items-center justify-center flex-none">
+                                <i class="fa-regular fa-envelope"></i>
+                            </span>
+                            <div>
+                                <p class="text-sm uppercase tracking-wider text-slate-500 mb-1">Email</p>
+                                <a href="mailto:info@milkywaystarmetal.com" class="font-semibold hover:text-[#0078df]">info@milkywaystarmetal.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="w-11 h-11 rounded-full border border-[#d4a247] text-[#d4a247] flex items-center justify-center flex-none">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </span>
+                            <div>
+                                <p class="text-sm uppercase tracking-wider text-slate-500 mb-1">WhatsApp</p>
+                                <p class="font-semibold">+86 18686879810 / +65 81367768</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="w-11 h-11 rounded-full border border-[#d4a247] text-[#d4a247] flex items-center justify-center flex-none">
+                                <i class="fa-brands fa-weixin"></i>
+                            </span>
+                            <div>
+                                <p class="text-sm uppercase tracking-wider text-slate-500 mb-1">WeChat</p>
+                                <p class="font-semibold">375125275</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="w-11 h-11 rounded-full border border-[#d4a247] text-[#d4a247] flex items-center justify-center flex-none">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </span>
+                            <div>
+                                <p class="text-sm uppercase tracking-wider text-slate-500 mb-1">Hong Kong Office</p>
+                                <p class="font-semibold leading-7">Room A, 12/F, Kiu Fu Commercial Building, 300 Lockhart Road, Wan Chai, Hong Kong</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="w-11 h-11 rounded-full border border-[#d4a247] text-[#d4a247] flex items-center justify-center flex-none">
+                                <i class="fa-solid fa-anchor"></i>
+                            </span>
+                            <div>
+                                <p class="text-sm uppercase tracking-wider text-slate-500 mb-1">Port Service Coverage</p>
+                                <p class="font-semibold leading-7">Hong Kong Port and Kwai Tsing Container Terminals, Hong Kong</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="mailto:info@milkywaystarmetal.com" method="post" enctype="text/plain" class="lg:col-span-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <label class="relative block">
+                        <i class="fa-regular fa-user absolute left-4 top-5 text-[#d4a247] text-lg"></i>
+                        <input class="contact-input" name="Name" type="text" placeholder="Company / Name">
+                    </label>
+                    <label class="relative block">
+                        <i class="fa-regular fa-envelope absolute left-4 top-5 text-[#d4a247] text-lg"></i>
+                        <input class="contact-input" name="Email" type="email" placeholder="Business Email">
+                    </label>
+                    <label class="relative block">
+                        <i class="fa-brands fa-whatsapp absolute left-4 top-5 text-[#d4a247] text-lg"></i>
+                        <input class="contact-input" name="Phone or WhatsApp" type="text" placeholder="Phone / WhatsApp">
+                    </label>
+                    <label class="relative block">
+                        <i class="fa-regular fa-pen-to-square absolute left-4 top-5 text-[#d4a247] text-lg"></i>
+                        <input class="contact-input" name="Subject" type="text" placeholder="Material / Service">
+                    </label>
+                    <label class="relative block md:col-span-2">
+                        <i class="fa-regular fa-comment-dots absolute left-4 top-5 text-[#d4a247] text-lg"></i>
+                        <textarea class="contact-input min-h-[170px] resize-y" name="Message" placeholder="How can we help you?"></textarea>
+                    </label>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="w-full px-8 py-4 bg-[#d4a247] hover:bg-[#b9852d] text-white font-bold uppercase tracking-wide transition-colors">Enquiry by Email</button>
+                        <p class="mt-4 text-sm leading-6 text-slate-500">
+                            This form opens your email client. You may also contact us directly by email, WhatsApp, or WeChat.
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#050607] border-t border-zinc-900/60 py-6">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-center text-[11px] text-zinc-500 tracking-wider">
+            <span class="font-mono text-zinc-400 font-bold">&copy; 2026 Milky Way Star. All Rights Reserved.</span>
+        </div>
+    </footer>
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        mobileMenuBtn.addEventListener('click', () => mobileDrawer.classList.toggle('hidden'));
+    </script>
+</body>
+</html>
