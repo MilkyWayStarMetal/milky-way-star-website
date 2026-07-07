@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products & Manufacturing | Milky Way Star</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=JetBrains+Mono:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'], mono: ['JetBrains Mono','monospace'] }, colors: { obsidian: '#050607' } } } }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #050607; color: #f4f4f5; overflow-x: hidden; }
+        .nav-logo-mark { position: relative; display: inline-flex; width: 2.75rem; height: 2.75rem; align-items: center; justify-content: center; flex: 0 0 auto; isolation: isolate; }
+        .nav-logo-mark::before, .nav-logo-mark::after { content: ""; position: absolute; pointer-events: none; border-radius: 999px; mix-blend-mode: screen; z-index: 2; }
+        .nav-logo-mark::before { inset: 10%; background: radial-gradient(circle at 52% 34%, rgba(255,244,194,.72), rgba(249,115,22,.2) 35%, transparent 64%); filter: blur(3px); animation: logo-flame-glow 2.8s ease-in-out infinite; }
+        .nav-logo-mark::after { inset: 42% 28% 22% 33%; border-radius: 45%; background: linear-gradient(120deg, transparent 12%, rgba(255,255,255,.92) 42%, rgba(250,204,21,.82) 54%, transparent 76%); filter: blur(1px); opacity: 0; transform: translateX(-24%) rotate(-18deg); animation: logo-crack-spark 2.35s ease-in-out infinite; }
+        .nav-logo-img { width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 1; transform-origin: 50% 68%; filter: drop-shadow(0 0 12px rgba(249,115,22,.45)); animation: logo-flame-drift 3.6s ease-in-out infinite; }
+        @media (min-width: 640px) { .nav-logo-mark { width: 3rem; height: 3rem; } }
+        @keyframes logo-flame-drift { 0%,100% { transform: rotate(-1deg) scale(1); filter: drop-shadow(0 0 10px rgba(249,115,22,.38)); } 46% { transform: rotate(1.5deg) scale(1.035); filter: drop-shadow(0 0 16px rgba(250,204,21,.58)); } 70% { transform: rotate(-.5deg) scale(1.01); } }
+        @keyframes logo-flame-glow { 0%,100% { opacity: .24; transform: scale(.9) translateY(2px); } 50% { opacity: .58; transform: scale(1.08) translateY(-1px); } }
+        @keyframes logo-crack-spark { 0%,58%,100% { opacity: 0; transform: translateX(-28%) rotate(-18deg) scaleX(.7); } 67% { opacity: .95; transform: translateX(8%) rotate(-18deg) scaleX(1.12); } 76% { opacity: .12; transform: translateX(28%) rotate(-18deg) scaleX(.82); } }
+        .page-hero { background-image: linear-gradient(90deg, rgba(3,4,5,.74), rgba(3,4,5,.22)), url("assets/company-gallery/company-b18.jpg"); background-size: cover; background-position: center; }
+        .flow-icon-panel { background: linear-gradient(135deg, #ff9f1c 0%, #f97316 54%, #b45309 100%); box-shadow: inset 0 -14px 30px rgba(124,45,18,.16); }
+        .product-card {
+            position: relative;
+            min-height: 192px;
+            overflow: hidden;
+            transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+        }
+        .product-card[data-open-products] {
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 162, 71, .55);
+            box-shadow: 0 22px 42px rgba(15, 23, 42, .12);
+        }
+        .product-card-content {
+            position: relative;
+            z-index: 1;
+        }
+        .product-card-action {
+            display: inline-flex;
+            align-items: center;
+            gap: .55rem;
+            margin-top: 1.25rem;
+            color: #b45309;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+        .product-card-action i {
+            transition: transform .2s ease;
+        }
+        .product-card:hover .product-card-action i {
+            transform: translateX(4px);
+        }
+        .product-modal {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .22s ease;
+        }
+        .product-modal.is-open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .product-modal-panel {
+            transform: translateY(18px) scale(.98);
+            transition: transform .24s ease;
+        }
+        .product-modal.is-open .product-modal-panel {
+            transform: translateY(0) scale(1);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen bg-obsidian">
+    <nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-obsidian/70 border-b border-zinc-900/40">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <span class="nav-logo-mark" aria-hidden="true"><img src="assets/logo-nav-icon.png" alt="" class="nav-logo-img"></span>
+                <span class="font-mono tracking-widest text-base sm:text-lg font-bold text-white uppercase group-hover:text-emerald-400">Milky Way Star</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-10 text-xs tracking-wider text-zinc-400 font-light uppercase">
+                <a href="index.html" class="hover:text-emerald-400">Home</a>
+                <a href="company.html" class="hover:text-emerald-400">Company</a>
+                <a href="products.html" class="text-emerald-400">Products & Manufacturing</a>
+                <a href="contact.html" class="hover:text-emerald-400">Contact Us</a>
+            </div>
+            <button id="mobileMenuBtn" class="md:hidden text-zinc-400" aria-label="Toggle menu"><i class="fa-solid fa-bars text-xl"></i></button>
+        </div>
+        <div id="mobileDrawer" class="hidden md:hidden fixed inset-0 top-20 bg-obsidian/95 backdrop-blur-lg z-40 px-8 py-12 border-t border-zinc-900">
+            <div class="flex flex-col space-y-8 text-xl tracking-wide font-light">
+                <a href="index.html" class="mobile-link text-zinc-300">Home</a>
+                <a href="company.html" class="mobile-link text-zinc-300">Company</a>
+                <a href="products.html" class="mobile-link text-emerald-400">Products & Manufacturing</a>
+                <a href="contact.html" class="mobile-link text-zinc-300">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-hero min-h-[58vh] pt-32 pb-20 px-6 flex items-end">
+        <div class="max-w-7xl mx-auto w-full">
+            <p class="font-mono text-xs uppercase tracking-[0.35em] text-emerald-300 mb-5">Products & Manufacturing</p>
+            <h1 class="max-w-4xl text-5xl sm:text-7xl font-semibold leading-tight">Industrial residues, technical recovery routes, and refined metal value creation.</h1>
+        </div>
+    </header>
+
+    <main class="bg-white text-slate-950">
+        <section class="px-6 py-24">
+            <div class="max-w-7xl mx-auto">
+                <div class="max-w-3xl mb-14">
+                    <h2 class="text-[#00324d] text-4xl sm:text-5xl font-bold mb-8">Materials We Handle</h2>
+                    <p class="text-lg leading-8 text-slate-700">We support customers handling recyclable metal by-products, secondary raw materials, concentrates, catalysts, and industrial residues. Final acceptance depends on origin, composition, analysis, regulatory status, and logistics route.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <article class="product-card border border-slate-200 p-7 bg-slate-50 cursor-pointer" data-open-products="zinc" role="button" tabindex="0" aria-label="View zinc material product photos">
+                        <div class="product-card-content">
+                            <h3 class="text-[#00324d] font-bold text-xl mb-3">Zinc Materials</h3>
+                            <p class="text-slate-600 leading-7">Zinc ash, zinc oxide material, EAF dust-related material, zinc ore, and recyclable zinc-bearing residues.</p>
+                            <span class="product-card-action">
+                                View product photos <i class="fa-solid fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </article>
+                    <article class="product-card border border-slate-200 p-7 bg-slate-50 cursor-pointer" data-open-products="copper" role="button" tabindex="0" aria-label="View copper material product photos">
+                        <div class="product-card-content">
+                            <h3 class="text-[#00324d] font-bold text-xl mb-3">Copper Materials</h3>
+                            <p class="text-slate-600 leading-7">Copper concentrate, copper-bearing by-products, brass materials, and selected secondary copper resources.</p>
+                            <span class="product-card-action">
+                                View product photos <i class="fa-solid fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </article>
+                    <article class="product-card border border-slate-200 p-7 bg-slate-50 cursor-pointer" data-open-products="nickel" role="button" tabindex="0" aria-label="View nickel material product photos">
+                        <div class="product-card-content">
+                            <h3 class="text-[#00324d] font-bold text-xl mb-3">Nickel Materials</h3>
+                            <p class="text-slate-600 leading-7">Nickel-bearing residues and secondary materials, including nickel sludge and other recyclable nickel-bearing resources.</p>
+                            <span class="product-card-action">
+                                View product photos <i class="fa-solid fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </article>
+                    <article class="product-card border border-slate-200 p-7 bg-slate-50 cursor-pointer" data-open-products="catalyst" role="button" tabindex="0" aria-label="View spent catalyst product photos">
+                        <div class="product-card-content">
+                            <h3 class="text-[#00324d] font-bold text-xl mb-3">Spent Catalyst</h3>
+                            <p class="text-slate-600 leading-7">Selected industrial spent catalyst, including vanadium catalyst, molybdenum catalyst, cobalt catalyst, and other catalyst materials containing recoverable metals.</p>
+                            <span class="product-card-action">
+                                View product photos <i class="fa-solid fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </article>
+                    <article class="product-card border border-slate-200 p-7 bg-slate-50 cursor-pointer" data-open-products="byproducts" role="button" tabindex="0" aria-label="View industrial by-product photos">
+                        <div class="product-card-content">
+                            <h3 class="text-[#00324d] font-bold text-xl mb-3">Industrial By-products</h3>
+                            <p class="text-slate-600 leading-7">Other recyclable metal-bearing by-products, including lead-bearing materials and selected industrial residues from production processes.</p>
+                            <span class="product-card-action">
+                                View product photos <i class="fa-solid fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </article>
+                    <article class="product-card border border-slate-200 p-7 bg-slate-50"><div class="product-card-content"><h3 class="text-[#00324d] font-bold text-xl mb-3">Recovered Materials</h3><p class="text-slate-600 leading-7">Recovered raw materials and secondary resources prepared for reuse in appropriate downstream applications.</p></div></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 py-24 bg-slate-50 border-t border-slate-100">
+            <div class="max-w-6xl mx-auto">
+                <div class="max-w-3xl mb-14">
+                    <h2 class="text-[#00324d] text-4xl sm:text-5xl font-bold mb-8">Recovery Service Flow</h2>
+                    <p class="text-lg leading-8 text-slate-700">Our cooperation flow is designed for reliable international material movement, quality control, and circular value recovery.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <article class="bg-white p-5 shadow-[0_14px_38px_rgba(15,23,42,.08)]"><div class="flow-icon-panel h-36 flex items-center justify-center mb-7"><i class="fa-solid fa-route text-6xl text-white"></i></div><h3 class="text-[#00324d] font-bold mb-3">Transportation</h3><p class="text-sm text-slate-600 leading-6">Route review, documentation coordination, and cross-border logistics support.</p></article>
+                    <article class="bg-white p-5 shadow-[0_14px_38px_rgba(15,23,42,.08)]"><div class="flow-icon-panel h-36 flex items-center justify-center mb-7"><i class="fa-solid fa-warehouse text-6xl text-white"></i></div><h3 class="text-[#00324d] font-bold mb-3">Collection</h3><p class="text-sm text-slate-600 leading-6">Material sourcing, warehouse handling, packing checks, and shipment preparation.</p></article>
+                    <article class="bg-white p-5 shadow-[0_14px_38px_rgba(15,23,42,.08)]"><div class="flow-icon-panel h-36 flex items-center justify-center mb-7"><i class="fa-solid fa-filter text-6xl text-white"></i></div><h3 class="text-[#00324d] font-bold mb-3">Sorting & Processing</h3><p class="text-sm text-slate-600 leading-6">Sampling, analysis, quality classification, and suitable processing route matching.</p></article>
+                    <article class="bg-white p-5 shadow-[0_14px_38px_rgba(15,23,42,.08)]"><div class="flow-icon-panel h-36 flex items-center justify-center mb-7"><i class="fa-solid fa-arrows-spin text-6xl text-white"></i></div><h3 class="text-[#00324d] font-bold mb-3">Utilization</h3><p class="text-sm text-slate-600 leading-6">Recovered metal value returned to industrial supply chains through downstream partners.</p></article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="productModal" class="product-modal fixed inset-0 z-[80] bg-slate-950/70 backdrop-blur-sm px-4 py-8 overflow-y-auto" aria-hidden="true">
+        <div class="min-h-full flex items-center justify-center">
+            <section class="product-modal-panel w-full max-w-5xl bg-white text-slate-950 shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+                <div class="flex items-start justify-between gap-6 border-b border-slate-200 px-6 sm:px-8 py-6">
+                    <div>
+                        <p class="font-mono text-xs uppercase tracking-[0.28em] text-amber-600 mb-3">Product Photos</p>
+                        <h2 id="productModalTitle" class="text-3xl sm:text-4xl font-bold text-[#00324d]">Product Materials</h2>
+                    </div>
+                    <button type="button" id="closeProductModal" class="h-11 w-11 border border-slate-300 flex items-center justify-center text-slate-500 hover:text-[#00324d] hover:border-[#00324d]" aria-label="Close product photos">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="px-6 sm:px-8 py-8">
+                    <p id="productModalIntro" class="max-w-3xl text-slate-600 leading-7 mb-8"></p>
+                    <div id="productPhotoGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer class="bg-[#050607] border-t border-zinc-900/60 py-6">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-center text-[11px] text-zinc-500 tracking-wider">
+            <span class="font-mono text-zinc-400 font-bold">&copy; 2026 Milky Way Star. All Rights Reserved.</span>
+        </div>
+    </footer>
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        mobileMenuBtn.addEventListener('click', () => mobileDrawer.classList.toggle('hidden'));
+
+        const productModal = document.getElementById('productModal');
+        const closeProductModal = document.getElementById('closeProductModal');
+        const productTriggers = document.querySelectorAll('[data-open-products]');
+        const productModalTitle = document.getElementById('productModalTitle');
+        const productModalIntro = document.getElementById('productModalIntro');
+        const productPhotoGrid = document.getElementById('productPhotoGrid');
+
+        const productCatalog = {
+            zinc: {
+                title: 'Zinc Materials',
+                intro: 'Representative zinc-bearing materials, including zinc ash and recyclable zinc residues.',
+                images: [
+                    'assets/product-gallery/zinc-02.jpg',
+                    'assets/product-gallery/zinc-03.jpg'
+                ]
+            },
+            copper: {
+                title: 'Copper Materials',
+                intro: 'Representative copper-bearing materials, including copper ash and other recyclable copper residues.',
+                images: [
+                    'assets/product-gallery/copper-01.jpg',
+                    'assets/product-gallery/copper-02.jpg',
+                    'assets/product-gallery/copper-03.jpg',
+                    'assets/product-gallery/copper-04.jpg',
+                    'assets/product-gallery/copper-05.jpg'
+                ]
+            },
+            nickel: {
+                title: 'Nickel Materials',
+                intro: 'Representative nickel-bearing residues and secondary nickel materials.',
+                images: [
+                    'assets/product-gallery/nickel-01.jpg',
+                    'assets/product-gallery/nickel-02.jpg'
+                ]
+            },
+            catalyst: {
+                title: 'Spent Catalyst',
+                intro: 'Representative spent catalyst materials, including vanadium-bearing and cobalt-bearing catalyst materials.',
+                images: [
+                    'assets/product-gallery/catalyst-01.jpg'
+                ]
+            },
+            byproducts: {
+                title: 'Industrial By-products',
+                intro: 'Representative lead-bearing and other recyclable metal-bearing industrial by-products.',
+                images: [
+                    'assets/product-gallery/byproduct-01.jpg',
+                    'assets/product-gallery/byproduct-02.jpg'
+                ]
+            }
+        };
+
+        const renderProductPhotos = (category) => {
+            const product = productCatalog[category];
+            if (!product) return;
+            productModalTitle.textContent = product.title;
+            productModalIntro.textContent = product.intro;
+            productPhotoGrid.innerHTML = product.images.map((src) => `
+                <article class="border border-slate-200 bg-slate-50 overflow-hidden">
+                    <img src="${src}" alt="${product.title} product photo" class="w-full aspect-[4/3] object-cover">
+                </article>
+            `).join('');
+        };
+
+        const openProductModal = (category) => {
+            renderProductPhotos(category);
+            productModal.classList.add('is-open');
+            productModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const hideProductModal = () => {
+            productModal.classList.remove('is-open');
+            productModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        };
+
+        productTriggers.forEach((trigger) => {
+            trigger.addEventListener('click', () => openProductModal(trigger.dataset.openProducts));
+            trigger.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openProductModal(trigger.dataset.openProducts);
+                }
+            });
+        });
+        closeProductModal.addEventListener('click', hideProductModal);
+        productModal.addEventListener('click', (event) => {
+            if (event.target === productModal) hideProductModal();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && productModal.classList.contains('is-open')) hideProductModal();
+        });
+    </script>
+</body>
+</html>
